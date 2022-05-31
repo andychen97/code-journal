@@ -42,7 +42,7 @@
           </div>
         </div>
         <div data-view="entry-form" class="column-half">
-          <form>
+          <form id="entry">
             <div class="title-margin">
               <label for="title">Title</label>
             </div>
@@ -50,13 +50,11 @@
               <input type="text" id="title" name="user-title" class="input margin-bottom-40" required>
             </div>
             <div>
-              <label for="img-URL">Photo URL</label>
+              <label for="img-link">Photo URL</label>
             </div>
             <div>
-              <input type="text" id="img-URL" name="user-URL" class="input margin-bottom-40" required>
+              <input type="text" id="img-link" name="user-URL" class="input margin-bottom-40" required>
             </div>
-
-
             <div class="notes notes-text">
               <label for="notes">Notes</label>
             </div>
@@ -64,10 +62,8 @@
               <textarea id="notes" name="notes" class="input" required></textarea>
             </div>
             <div class="align-right">
-              <button class="purple-button">SAVE</button>
+              <input type="submit" value="SAVE" class="purple-button">
             </div>
-
-
           </form>
         </div>
       </div>
