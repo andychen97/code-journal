@@ -3,6 +3,10 @@
   font-weight: 600;
 }
 
+p {
+  font-family: "Open Sans", sans-serif;
+}
+
 .purple-header {
   background-color: #562b81;
   color: white;
@@ -62,4 +66,8 @@ textarea {
 
 .align-right {
   text-align: right;
+}
+
+.descriptions {
+  line-height: 1.5;
 }
