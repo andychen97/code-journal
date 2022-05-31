@@ -14,11 +14,64 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Proza+Libre:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
+  <header class="purple-header">
+    <div class="container">
+      <div class="row">
+        <div class="column-full">
+          <h2 class="thin-font">Code Journal</h2>
+        </div>
+      </div>
+    </div>
   </header>
-  <main>
+  <main class="grey-background">
+    <div class="container">
+      <div class="row">
+        <div class="column-full">
+          <h1 class="font28pt">New Entry</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column-half">
+          <div>
+            <img src="images/placeholder-image-square.jpg" alt="placeholder-image" class="placeholder-img">
+          </div>
+        </div>
+        <div data-view="entry-form" class="column-half">
+          <form>
+            <div class="title-margin">
+              <label for="title">Title</label>
+            </div>
+            <div>
+              <input type="text" id="title" name="user-title" class="input margin-bottom-40">
+            </div>
+            <div>
+              <label for="img-URL">Photo URL</label>
+            </div>
+            <div>
+              <input type="text" id="img-URL" name="user-URL" class="input margin-bottom-40">
+            </div>
+
+
+            <div class="notes notes-text">
+              <label for="notes">Notes</label>
+            </div>
+            <div class="notes">
+              <textarea id="notes" name="notes" class="input"></textarea>
+            </div>
+            <div class="align-right">
+              <button class="purple-button">SAVE</button>
+            </div>
+
+
+          </form>
+        </div>
+      </div>
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
