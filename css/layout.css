@@ -18,6 +18,10 @@
   width: 100%;
 }
 
+.title-margin {
+  margin-top: 25px;
+}
+
 @media screen and (min-width: 768px) {
   .container {
     max-width: 900px;
@@ -30,5 +34,13 @@
 
   .column-half {
     width: 50%;
+  }
+
+  .notes-text {
+    margin-top: 20px;
+  }
+
+  .title-margin {
+    margin-top: 0;
   }
 }
