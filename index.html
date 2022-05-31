@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Proza+Libre:wght@400;600&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="grey-background">
   <header class="purple-header">
     <div class="container">
       <div class="row">
@@ -28,11 +28,11 @@
       </div>
     </div>
   </header>
-  <main class="grey-background">
-    <div class="container">
+  <main class="container">
+    <form data-view="entry-form">
       <div class="row">
         <div class="column-full">
-          <h1 class="font28pt">New Entry</h1>
+          <h1 class="font28px">New Entry</h1>
         </div>
       </div>
       <div class="row">
@@ -41,33 +41,35 @@
             <img src="images/placeholder-image-square.jpg" alt="placeholder-image" class="placeholder-img">
           </div>
         </div>
-        <div data-view="entry-form" class="column-half">
-          <form id="entry">
-            <div class="title-margin">
-              <label for="title">Title</label>
-            </div>
-            <div>
-              <input type="text" id="title" name="user-title" class="input margin-bottom-40" required>
-            </div>
-            <div>
-              <label for="img-link">Photo URL</label>
-            </div>
-            <div>
-              <input type="text" id="img-link" name="user-URL" class="input margin-bottom-40" required>
-            </div>
-            <div class="notes notes-text">
-              <label for="notes">Notes</label>
-            </div>
-            <div class="notes">
-              <textarea id="notes" name="notes" class="input" required></textarea>
-            </div>
-            <div class="align-right">
-              <input type="submit" value="SAVE" class="purple-button">
-            </div>
-          </form>
+        <div class="column-half">
+          <div class="title-margin">
+            <label for="title">Title</label>
+          </div>
+          <div>
+            <input type="text" id="title" name="user-title" class="input margin-bottom-40" required>
+          </div>
+          <div>
+            <label for="img-link">Photo URL</label>
+          </div>
+          <div>
+            <input type="text" id="img-link" name="user-URL" class="input margin-bottom-40" required>
+          </div>
         </div>
       </div>
-    </div>
+      <div class="row">
+        <div class="column-full">
+          <div class="notes-text">
+            <label for="notes">Notes</label>
+          </div>
+          <div>
+            <textarea id="notes" name="notes" class="input" required></textarea>
+          </div>
+          <div class="align-right">
+            <input type="submit" value="SAVE" class="purple-button">
+          </div>
+        </div>
+      </div>
+    </form>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>

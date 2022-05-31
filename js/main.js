@@ -1,15 +1,21 @@
-var $imageLink = document.getElementById('img-link');
+/* global data */
+
+var $imageLink = document.querySelector('input[name="user-URL"]');
 var $image = document.querySelector('.placeholder-img');
 
-$imageLink.addEventListener('input', function (event) {
+$imageLink.addEventListener('input', imageLink);
+
+function imageLink(event) {
   $image.setAttribute('src', event.target.value);
-});
+}
 
-var $entry = document.getElementById('entry');
-var $title = document.getElementById('title');
-var $notes = document.getElementById('notes');
+var $entry = document.querySelector('form');
+var $title = document.querySelector('input[name="user-title"]');
+var $notes = document.querySelector('textarea');
 
-$entry.addEventListener('submit', function (event) {
+$entry.addEventListener('submit', dataSet);
+
+function dataSet(event) {
   event.preventDefault();
   var singleData = {
     title: $title.value,
@@ -19,10 +25,5 @@ $entry.addEventListener('submit', function (event) {
   };
   data.entries.unshift(singleData);
   $image.setAttribute('src', 'images/placeholder-image-square.jpg');
-  $title.value = '';
-  $imageLink.value = '';
-  $notes.value = '';
-
-  var dataJSON = JSON.stringify(data);
-  localStorage.setItem('code-journal-data', dataJSON);
-});
+  event.target.reset();
+}

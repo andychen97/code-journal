@@ -12,8 +12,8 @@
   font-weight: lighter;
 }
 
-.font28pt {
-  font-size: 28pt;
+.font40px {
+  font-size: 40px;
 }
 
 .grey-background {
@@ -29,7 +29,7 @@
 
 .input {
   width: 100%;
-  padding: 12px 0;
+  padding: 12px 10px;
   border: 1px solid #bebebe;
   border-radius: 5px;
   margin-top: 10px;
@@ -40,7 +40,7 @@
 }
 
 label {
-  font-size: 15pt;
+  font-size: 20px;
 }
 
 textarea {
@@ -50,7 +50,7 @@ textarea {
 }
 
 .purple-button {
-  font-size: 15pt;
+  font-size: 20px;
   font-weight: lighter;
   color: white;
   background-color: #562b81;
