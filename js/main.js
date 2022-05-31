@@ -22,4 +22,7 @@ $entry.addEventListener('submit', function (event) {
   $title.value = '';
   $imageLink.value = '';
   $notes.value = '';
+
+  var dataJSON = JSON.stringify(data);
+  localStorage.setItem('code-journal-data', dataJSON);
 });
