@@ -39,6 +39,8 @@ function dataSet(event) {
   $form.className = 'hidden';
   $ul.prepend(createEntries(data.entries[0]));
   entryText();
+  data.view = 'entries';
+  viewSwap();
 }
 
 function createEntries(entry) {
@@ -80,6 +82,8 @@ $entriesPage.addEventListener('click', viewEntries);
 function viewEntries(event) {
   $dataViewEntries.className = '';
   $form.className = 'hidden';
+  data.view = 'entries';
+  viewSwap();
 }
 
 var $newButton = document.querySelector('div .row .space-between > a');
@@ -89,4 +93,17 @@ $newButton.addEventListener('click', newButton);
 function newButton(event) {
   $form.className = '';
   $dataViewEntries.className = 'hidden';
+  data.view = 'entry-form';
+  viewSwap();
 }
+
+function viewSwap() {
+  if (data.view === 'view-entries') {
+    $dataViewEntries.className = '';
+    $form.className = 'hidden';
+  } else if (data.view === 'entry-form') {
+    $dataViewEntries.className = 'hidden';
+    $form.className = '';
+  }
+}
+viewSwap();
