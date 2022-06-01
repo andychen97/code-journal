@@ -28,27 +28,35 @@ function dataSet(event) {
   event.target.reset();
 }
 
-// function createEntries(entry) {
-//   var $li = document.createElement('li');
-//   var $divRow = document.createElement('div');
-//   $divRow.className = 'row';
-//   $li.appendChild($divRow);
-//   var $divColHalf = document.createElement('div');
-//   $divColHalf.className = 'column-half';
-//   $divRow.appendChild($divColHalf);
-//   var $img = document.createElement('img');
-//   $img.setAttribute('src', '/images/placeholder-image-square.jpg');
-//   $img.className = 'placeholder-img';
-//   $divColHalf.appendChild($img);
-//   var $divColHalf2 = document.createElement('div');
-//   $divColHalf2.className = 'column-half';
-//   $divRow.appendChild($divColHalf2);
-//   var $h2 = document.createElement('h2');
-//   $h2.textContent = entry.title;
-//   $divColHalf2.appendChild($h2);
-//   var $p = document.createElement('p');
-//   $p.className = 'descriptions';
-//   $p.textContent = entry.notes;
-//   $divColHalf2.appendChild($p);
-//   return $li;
-// }
+function createEntries(entry) {
+  var $li = document.createElement('li');
+  var $divRow = document.createElement('div');
+  $divRow.className = 'row';
+  $li.appendChild($divRow);
+  var $divColHalf = document.createElement('div');
+  $divColHalf.className = 'column-half';
+  $divRow.appendChild($divColHalf);
+  var $img = document.createElement('img');
+  $img.setAttribute('src', entry.photoURL);
+  $img.className = 'placeholder-img';
+  $divColHalf.appendChild($img);
+  var $divColHalf2 = document.createElement('div');
+  $divColHalf2.className = 'column-half';
+  $divRow.appendChild($divColHalf2);
+  var $h2 = document.createElement('h2');
+  $h2.textContent = entry.title;
+  $divColHalf2.appendChild($h2);
+  var $p = document.createElement('p');
+  $p.className = 'descriptions';
+  $p.textContent = entry.notes;
+  $divColHalf2.appendChild($p);
+  return $li;
+}
+
+var $ul = document.querySelector('ul');
+window.addEventListener('DOMContentLoaded', loaded);
+function loaded(event) {
+  for (var i = 0; i < data.entries.length; i++) {
+    $ul.prepend(createEntries(data.entries[i]));
+  }
+}
