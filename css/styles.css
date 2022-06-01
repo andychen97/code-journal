@@ -3,6 +3,10 @@
   font-weight: 600;
 }
 
+p {
+  font-family: "Open Sans", sans-serif;
+}
+
 .purple-header {
   background-color: #562b81;
   color: white;
@@ -57,9 +61,30 @@ textarea {
   border: 1px solid #562b81;
   border-radius: 5px;
   padding: 5px 15px;
-  margin: 20px 0;
+  margin: 30px 0;
+  text-decoration: none;
 }
 
 .align-right {
   text-align: right;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.center {
+  justify-content: center;
+}
+
+.descriptions {
+  line-height: 1.5;
+}
+
+.entries {
+  font-family: "Open Sans", sans-serif;
+  font-size: 20px;
+  text-decoration: none;
+  color: white;
+  margin: 20px 40px;
 }
