@@ -26,9 +26,10 @@
     <div class="container">
       <div class="row">
         <div class="column-full">
-          <h2 class="thin-font">Code Journal
-            <span><a href="#NewEntries" class="entries">Entries</a></span>
-          </h2>
+          <div class="row">
+            <h2 class="thin-font">Code Journal</h2>
+            <a href="#NewEntries" class="entries">Entries</a>
+          </div>
         </div>
       </div>
     </div>
@@ -76,15 +77,20 @@
       </div>
     </form>
 
-    <div data-view="entries" class="">
+    <div data-view="entries">
       <div class="row">
         <div class="column-full">
-          <h1 class="font28px inline">Entries</h1>
-          <a href="#NewEntries" class="purple-button align-right">New</a>
+          <div class="row space-between">
+            <h1 class="font28px">Entries</h1>
+            <a href="#NewEntries" class="purple-button">New</a>
+          </div>
         </div>
-        <ul>
-        </ul>
       </div>
+      <div class="row center">
+        <p class="">No entries have been recorded.</p>
+      </div>
+      <ul>
+      </ul>
     </div>
   </main>
   <script src="js/data.js"></script>

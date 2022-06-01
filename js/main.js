@@ -9,11 +9,11 @@ function imageLink(event) {
   $image.setAttribute('src', event.target.value);
 }
 
-var $entry = document.querySelector('form');
+var $form = document.querySelector('form');
 var $title = document.querySelector('input[name="user-title"]');
 var $notes = document.querySelector('textarea');
 
-$entry.addEventListener('submit', dataSet);
+$form.addEventListener('submit', dataSet);
 
 function dataSet(event) {
   event.preventDefault();
@@ -26,6 +26,9 @@ function dataSet(event) {
   data.entries.unshift(singleData);
   $image.setAttribute('src', 'images/placeholder-image-square.jpg');
   event.target.reset();
+  $dataViewEntries.className = '';
+  $form.className = 'hidden';
+  window.location.reload();
 }
 
 function createEntries(entry) {
@@ -38,7 +41,7 @@ function createEntries(entry) {
   $divRow.appendChild($divColHalf);
   var $img = document.createElement('img');
   $img.setAttribute('src', entry.photoURL);
-  $img.className = 'placeholder-img';
+  $img.className = 'placeholder-img margin-bottom-40';
   $divColHalf.appendChild($img);
   var $divColHalf2 = document.createElement('div');
   $divColHalf2.className = 'column-half';
@@ -57,6 +60,31 @@ var $ul = document.querySelector('ul');
 window.addEventListener('DOMContentLoaded', loaded);
 function loaded(event) {
   for (var i = 0; i < data.entries.length; i++) {
-    $ul.prepend(createEntries(data.entries[i]));
+    $ul.append(createEntries(data.entries[i]));
   }
+}
+
+var $entriesPage = document.querySelector('.entries');
+$entriesPage.addEventListener('click', viewEntries);
+
+function viewEntries(event) {
+  $dataViewEntries.className = '';
+  $form.className = 'hidden';
+  window.location.reload();
+}
+
+var $newButton = document.querySelector('div .row .space-between > a');
+var $dataViewEntries = document.querySelector('div[data-view="entries"]');
+$newButton.addEventListener('click', newButton);
+
+function newButton(event) {
+  $form.className = '';
+  $dataViewEntries.className = 'hidden';
+}
+
+var $noEntriesText = document.querySelector('p');
+if (data.entries.length > 0) {
+  $noEntriesText.className = 'hidden';
+} else {
+  $noEntriesText.className = '';
 }
