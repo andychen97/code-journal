@@ -40,7 +40,6 @@ function dataSet(event) {
   $ul.prepend(createEntries(data.entries[0]));
   entryText();
   data.view = 'entries';
-  viewSwap();
 }
 
 function createEntries(entry) {
@@ -83,7 +82,6 @@ function viewEntries(event) {
   $dataViewEntries.className = '';
   $form.className = 'hidden';
   data.view = 'entries';
-  viewSwap();
 }
 
 var $newButton = document.querySelector('div .row .space-between > a');
@@ -94,7 +92,6 @@ function newButton(event) {
   $form.className = '';
   $dataViewEntries.className = 'hidden';
   data.view = 'entry-form';
-  viewSwap();
 }
 
 function viewSwap() {
@@ -106,4 +103,5 @@ function viewSwap() {
     $form.className = '';
   }
 }
+
 viewSwap();
