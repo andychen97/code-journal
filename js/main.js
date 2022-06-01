@@ -28,7 +28,7 @@ function dataSet(event) {
   event.target.reset();
   $dataViewEntries.className = '';
   $form.className = 'hidden';
-  window.location.reload();
+  $ul.prepend(createEntries(data.entries[0]));
 }
 
 function createEntries(entry) {
@@ -70,7 +70,6 @@ $entriesPage.addEventListener('click', viewEntries);
 function viewEntries(event) {
   $dataViewEntries.className = '';
   $form.className = 'hidden';
-  window.location.reload();
 }
 
 var $newButton = document.querySelector('div .row .space-between > a');
