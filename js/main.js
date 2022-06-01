@@ -29,6 +29,7 @@ function dataSet(event) {
   $dataViewEntries.className = '';
   $form.className = 'hidden';
   $ul.prepend(createEntries(data.entries[0]));
+  entryText();
 }
 
 function createEntries(entry) {
@@ -82,8 +83,10 @@ function newButton(event) {
 }
 
 var $noEntriesText = document.querySelector('p');
-if (data.entries.length > 0) {
-  $noEntriesText.className = 'hidden';
-} else {
-  $noEntriesText.className = '';
+function entryText() {
+  if (data.entries.length < 1) {
+    $noEntriesText.className = '';
+  } else {
+    $noEntriesText.className = 'hidden';
+  }
 }
