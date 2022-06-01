@@ -1,4 +1,13 @@
 /* global data */
+var $noEntriesText = document.querySelector('p');
+function entryText() {
+  if (data.entries.length < 1) {
+    $noEntriesText.className = '';
+  } else {
+    $noEntriesText.className = 'hidden';
+  }
+}
+entryText();
 
 var $imageLink = document.querySelector('input[name="user-URL"]');
 var $image = document.querySelector('.placeholder-img');
@@ -80,13 +89,4 @@ $newButton.addEventListener('click', newButton);
 function newButton(event) {
   $form.className = '';
   $dataViewEntries.className = 'hidden';
-}
-
-var $noEntriesText = document.querySelector('p');
-function entryText() {
-  if (data.entries.length < 1) {
-    $noEntriesText.className = '';
-  } else {
-    $noEntriesText.className = 'hidden';
-  }
 }
