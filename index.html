@@ -28,7 +28,7 @@
         <div class="column-full">
           <div class="row">
             <h2 class="thin-font">Code Journal</h2>
-            <a href="#NewEntries" class="entries">Entries</a>
+            <a href="#Entries" class="entries">Entries</a>
           </div>
         </div>
       </div>
@@ -40,7 +40,8 @@
     <form data-view="entry-form" class="hidden">
       <div class="row">
         <div class="column-full">
-          <h1 class="font28px">New Entry</h1>
+          <h1 class="font28px hidden" id="new-entry">New Entry</h1>
+          <h1 class="font28px hidden" id="edit-entry">Edit Entry</h1>
         </div>
       </div>
       <div class="row">
@@ -80,7 +81,7 @@
     </form>
 
 
-    <div data-view="entries" class="hidden">
+    <div data-view="entries" class="">
       <div class="row">
         <div class="column-full">
           <div class="row space-between">
@@ -97,76 +98,33 @@
     </div>
 
 
-    <form data-view="edit-entry" class="hidden">
-      <div class="row">
-        <div class="column-full">
-          <h1 class="font28px">Edit Entry</h1>
-        </div>
-      </div>
-      <div class="row">
-        <div class="column-half">
-          <div>
-            <img src="images/placeholder-image-square.jpg" alt="placeholder-image" class="placeholder-img" id="edit-photo">
-          </div>
-        </div>
-        <div class="column-half">
-          <div class="title-margin">
-            <label for="title">Title</label>
-          </div>
-          <div>
-            <input type="text" name="edit-title" class="input margin-bottom-40" required>
-          </div>
-          <div>
-            <label for="img-link">Photo URL</label>
-          </div>
-          <div>
-            <input type="text" name="edit-URL" class="input margin-bottom-40" required>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="column-full">
-          <div class="notes-text">
-            <label for="notes">Notes</label>
-          </div>
-          <div>
-            <textarea name="edit-notes" class="input" required></textarea>
-          </div>
-          <div class="align-right">
-            <input type="submit" value="SAVE" class="purple-button">
-          </div>
-        </div>
-      </div>
-    </form>
-
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
 
-
-        <!-- <li>
-                  <div class="row">
-                    <div class="column-half">
-                      <img src="images/placeholder-image-square.jpg" class="placeholder-img">
-                    </div>
-                    <div class="column-half">
-                      <div class="row space-between">
-                        <h2>Ada Lovelace</h2>
-                        <img src="images/edit-icon.png" class="edit-icon">
-                      </div>
-                      <div class="row">
-                        <p>Augusta Ada King, Countess of Lovelace was<br>
-                          an English mathematician and writer,<br>
-                          chiefly known for her work on Charles<br>
-                          Babbage's proposed mechanical<br>
-                          general-purpose computer, the Analytical<br>
-                          Engine.
-                          Augusta Ada King, Countess of Lovelace was<br>
-                          an English mathematician and writer,<br>
-                          Engine.</p>
-                      </div>
-                    </div>
-                  </div>
-                </li> -->
+<!--<li>
+      <div class="row">
+        <div class="column-half">
+          <img src="images/placeholder-image-square.jpg" class="placeholder-img">
+        </div>
+        <div class="column-half">
+          <div class="row space-between">
+            <h2>Ada Lovelace</h2>
+            <img src="images/edit-icon.png" class="edit-icon">
+          </div>
+          <div class="row">
+            <p>Augusta Ada King, Countess of Lovelace was<br>
+              an English mathematician and writer,<br>
+              chiefly known for her work on Charles<br>
+              Babbage's proposed mechanical<br>
+              general-purpose computer, the Analytical<br>
+              Engine.
+              Augusta Ada King, Countess of Lovelace was<br>
+              an English mathematician and writer,<br>
+              Engine.</p>
+          </div>
+        </div>
+      </div>
+  </li> -->

@@ -26,33 +26,58 @@ $form.addEventListener('submit', dataSet);
 
 function dataSet(event) {
   event.preventDefault();
-  var singleData = {
-    title: $title.value,
-    photoURL: $imageLink.value,
-    notes: $notes.value,
-    entryId: data.nextEntryId++
-  };
-  data.entries.unshift(singleData);
-  $image.setAttribute('src', 'images/placeholder-image-square.jpg');
-  event.target.reset();
-  $dataViewEntries.className = '';
-  $form.className = 'hidden';
-  $ul.prepend(createEntries(data.entries[0]));
-  entryText();
+  if (data.editing === null) {
+    var singleData = {
+      title: $title.value,
+      photoURL: $imageLink.value,
+      notes: $notes.value,
+      entryId: data.nextEntryId++
+    };
+    data.entries.unshift(singleData);
+    $image.setAttribute('src', 'images/placeholder-image-square.jpg');
+    event.target.reset();
+    $dataViewEntries.className = '';
+    $form.className = 'hidden';
+    $newEntryTitle.className = 'font28px';
+    $editEntryTitle.className = 'font28px hidden';
+    $ul.prepend(createEntries(data.entries[0]));
+  } else {
+    for (var i = 0; i < data.entries.length; i++) {
+      var spot = document.querySelectorAll('li');
+      if (Number(data.editing.entryId) === Number(data.entries[i].entryId)) {
+        data.editing.title = $title.value;
+        data.editing.photoURL = $imageLink.value;
+        data.editing.notes = $notes.value;
+        data.editing.entryId = data.entries[i].entryId;
+        data.entries[i].title = data.editing.title;
+        data.entries[i].photoURL = data.editing.photoURL;
+        data.entries[i].notes = data.editing.notes;
+        data.entries[i].entryId = data.editing.entryId;
+        spot[i].replaceWith(createEntries());
+      }
+    }
+  }
+  data.editing = null;
   data.view = 'entries';
+  entryText();
+  viewSwap();
 }
 
-function createEntries(entry) {
+function createEntries(event) {
   var $li = document.createElement('li');
   var $divRow = document.createElement('div');
-  $divRow.className = 'row';
+  $divRow.className = 'row margin-bottom-40';
   $li.appendChild($divRow);
   var $divColHalf = document.createElement('div');
   $divColHalf.className = 'column-half';
   $divRow.appendChild($divColHalf);
   var $img = document.createElement('img');
-  $img.setAttribute('src', entry.photoURL);
-  $img.className = 'placeholder-img margin-bottom-40';
+  if (data.editing === null) {
+    $img.setAttribute('src', event.photoURL);
+  } else {
+    $img.setAttribute('src', data.editing.photoURL);
+  }
+  $img.className = 'placeholder-img';
   $divColHalf.appendChild($img);
   var $divColHalf2 = document.createElement('div');
   $divColHalf2.className = 'column-half';
@@ -61,11 +86,19 @@ function createEntries(entry) {
   $divRowBetween.className = 'row space-between';
   $divColHalf2.appendChild($divRowBetween);
   var $h2 = document.createElement('h2');
-  $h2.textContent = entry.title;
+  if (data.editing === null) {
+    $h2.textContent = event.title;
+  } else {
+    $h2.textContent = data.editing.title;
+  }
   $divRowBetween.appendChild($h2);
   var $editPic = document.createElement('img');
   $editPic.setAttribute('src', 'images/edit-icon.png');
-  $editPic.setAttribute('data-entry-id', entry.entryId);
+  if (data.editing === null) {
+    $editPic.setAttribute('data-entry-id', event.entryId);
+  } else {
+    $editPic.setAttribute('data-entry-id', data.editing.entryId);
+  }
   $editPic.className = 'edit-icon';
   $divRowBetween.appendChild($editPic);
   var $divRow2 = document.createElement('div');
@@ -73,7 +106,11 @@ function createEntries(entry) {
   $divColHalf2.appendChild($divRow2);
   var $p = document.createElement('p');
   $p.className = 'descriptions';
-  $p.textContent = entry.notes;
+  if (data.editing === null) {
+    $p.textContent = event.notes;
+  } else {
+    $p.textContent = data.editing.notes;
+  }
   $divRow2.appendChild($p);
   $editPic.addEventListener('click', editPage);
   return $li;
@@ -93,7 +130,6 @@ $entriesPage.addEventListener('click', viewEntries);
 function viewEntries(event) {
   $dataViewEntries.className = '';
   $form.className = 'hidden';
-  $editView.className = 'hidden';
   data.view = 'entries';
 }
 
@@ -104,44 +140,42 @@ $newButton.addEventListener('click', newButton);
 function newButton(event) {
   $form.className = '';
   $dataViewEntries.className = 'hidden';
-  $editView.className = 'hidden';
+  $newEntryTitle.className = 'font28px';
+  $editEntryTitle.className = 'font28px hidden';
   data.view = 'entry-form';
+  $image.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $form.reset();
 }
 
-var $editView = document.querySelector('form[data-view="edit-entry"]');
-var $editTitle = document.querySelector('input[name="edit-title"]');
-var $editURL = document.querySelector('input[name="edit-URL"]');
-var $editNotes = document.querySelector('textarea[name="edit-notes"]');
-var $editImage = document.querySelector('img[id="edit-photo"]');
+var $newEntryTitle = document.querySelector('h1[id="new-entry"]');
+var $editEntryTitle = document.querySelector('h1[id="edit-entry"]');
 
 function viewSwap() {
   if (data.view === 'entry-form') {
     $form.className = '';
     $dataViewEntries.className = 'hidden';
-    $editView.className = 'hidden';
+    $newEntryTitle.className = 'font28px';
   } else if (data.view === 'entries') {
     $dataViewEntries.className = '';
     $form.className = 'hidden';
-    $editView.className = 'hidden';
-  } else if (data.view === 'edit-entry') {
-    $form.className = 'hidden';
-    $dataViewEntries.className = 'hidden';
-    $editView.className = '';
   }
 }
 
 function editPage(event) {
-  $editView.className = '';
   $dataViewEntries.className = 'hidden';
-  $form.className = 'hidden';
+  $form.className = '';
+  $editEntryTitle.className = 'font28px';
+  $newEntryTitle.className = 'font28px hidden';
+
   data.view = 'entries';
   for (var i = 0; i < data.entries.length; i++) {
     if (Number(event.target.dataset.entryId) === data.entries[i].entryId) {
       data.editing = { ...data.entries[i] };
-      $editTitle.value = data.editing.title;
-      $editURL.value = data.editing.photoURL;
-      $editNotes.value = data.editing.notes;
-      $editImage.setAttribute('src', data.editing.photoURL);
+      $title.value = data.editing.title;
+      $imageLink.value = data.editing.photoURL;
+      $notes.value = data.editing.notes;
+      event.target.dataset.entryId = data.editing.entryId;
+      $image.setAttribute('src', data.editing.photoURL);
     }
   }
 }
