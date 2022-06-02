@@ -78,6 +78,16 @@ function createEntries(entry) {
   $editPic.addEventListener('click', editPage);
   return $li;
 }
+function editPage(event) {
+  $editView.className = '';
+  $dataViewEntries.className = 'hidden';
+  $form.className = 'hidden';
+  for (var i = 0; i < data.entries.length; i++) {
+    if (Number(event.target.dataset.entryId) === data.entries[i].entryId) {
+      data.editing = { ...data.entries[i] };
+    }
+  }
+}
 
 var $ul = document.querySelector('ul');
 window.addEventListener('DOMContentLoaded', loaded);
@@ -125,10 +135,3 @@ function viewSwap() {
 viewSwap();
 
 var $editView = document.querySelector('form[data-view="edit-entry"]');
-
-function editPage(event) {
-  $editView.className = '';
-  $dataViewEntries.className = 'hidden';
-  $form.className = 'hidden';
-
-}

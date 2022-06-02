@@ -7,6 +7,13 @@ var data = {
   nextEntryId: 1
 };
 
+// {
+//   title: $title.value,
+//   photoURL: $imageLink.value,
+//   notes: $notes.value,
+//   entryId: data.nextEntryId++
+// };
+
 var previousSaveDataJSON = localStorage.getItem('code-journal-data');
 if (previousSaveDataJSON !== null) {
   data = JSON.parse(previousSaveDataJSON);
