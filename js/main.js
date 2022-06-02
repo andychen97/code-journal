@@ -63,12 +63,10 @@ function createEntries(entry) {
   var $h2 = document.createElement('h2');
   $h2.textContent = entry.title;
   $divRowBetween.appendChild($h2);
-
   var $editPic = document.createElement('img');
   $editPic.setAttribute('src', 'images/edit-icon.png');
   $editPic.setAttribute('data-entry-id', entry.entryId);
   $editPic.className = 'edit-icon';
-
   $divRowBetween.appendChild($editPic);
   var $divRow2 = document.createElement('div');
   $divRow2.className = 'row';
