@@ -93,6 +93,7 @@ $entriesPage.addEventListener('click', viewEntries);
 function viewEntries(event) {
   $dataViewEntries.className = '';
   $form.className = 'hidden';
+  $editView.className = 'hidden';
   data.view = 'entries';
 }
 
@@ -103,26 +104,9 @@ $newButton.addEventListener('click', newButton);
 function newButton(event) {
   $form.className = '';
   $dataViewEntries.className = 'hidden';
+  $editView.className = 'hidden';
   data.view = 'entry-form';
 }
-
-function viewSwap() {
-  if (data.view === 'entries') {
-    $dataViewEntries.className = '';
-    $form.className = 'hidden';
-    $dataViewEntries.className = 'hidden';
-  } else if (data.view === 'entry-form') {
-    $form.className = '';
-    $dataViewEntries.className = 'hidden';
-    $editView.className = 'hidden';
-  } else if (data.view === 'edit-entry') {
-    $editView.className = '';
-    $dataViewEntries.className = 'hidden';
-    $form.className = 'hidden';
-  }
-}
-
-viewSwap();
 
 var $editView = document.querySelector('form[data-view="edit-entry"]');
 var $editTitle = document.querySelector('input[name="edit-title"]');
@@ -130,10 +114,27 @@ var $editURL = document.querySelector('input[name="edit-URL"]');
 var $editNotes = document.querySelector('textarea[name="edit-notes"]');
 var $editImage = document.querySelector('img[id="edit-photo"]');
 
+function viewSwap() {
+  if (data.view === 'entry-form') {
+    $form.className = '';
+    $dataViewEntries.className = 'hidden';
+    $editView.className = 'hidden';
+  } else if (data.view === 'entries') {
+    $dataViewEntries.className = '';
+    $form.className = 'hidden';
+    $editView.className = 'hidden';
+  } else if (data.view === 'edit-entry') {
+    $form.className = 'hidden';
+    $dataViewEntries.className = 'hidden';
+    $editView.className = '';
+  }
+}
+
 function editPage(event) {
   $editView.className = '';
   $dataViewEntries.className = 'hidden';
   $form.className = 'hidden';
+  data.view = 'entries';
   for (var i = 0; i < data.entries.length; i++) {
     if (Number(event.target.dataset.entryId) === data.entries[i].entryId) {
       data.editing = { ...data.entries[i] };
@@ -144,3 +145,5 @@ function editPage(event) {
     }
   }
 }
+
+viewSwap();
