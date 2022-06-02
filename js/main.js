@@ -78,16 +78,6 @@ function createEntries(entry) {
   $editPic.addEventListener('click', editPage);
   return $li;
 }
-function editPage(event) {
-  $editView.className = '';
-  $dataViewEntries.className = 'hidden';
-  $form.className = 'hidden';
-  for (var i = 0; i < data.entries.length; i++) {
-    if (Number(event.target.dataset.entryId) === data.entries[i].entryId) {
-      data.editing = { ...data.entries[i] };
-    }
-  }
-}
 
 var $ul = document.querySelector('ul');
 window.addEventListener('DOMContentLoaded', loaded);
@@ -135,3 +125,22 @@ function viewSwap() {
 viewSwap();
 
 var $editView = document.querySelector('form[data-view="edit-entry"]');
+var $editTitle = document.querySelector('input[name="edit-title"]');
+var $editURL = document.querySelector('input[name="edit-URL"]');
+var $editNotes = document.querySelector('textarea[name="edit-notes"]');
+var $editImage = document.querySelector('img[id="edit-photo"]');
+
+function editPage(event) {
+  $editView.className = '';
+  $dataViewEntries.className = 'hidden';
+  $form.className = 'hidden';
+  for (var i = 0; i < data.entries.length; i++) {
+    if (Number(event.target.dataset.entryId) === data.entries[i].entryId) {
+      data.editing = { ...data.entries[i] };
+      $editTitle.value = data.editing.title;
+      $editURL.value = data.editing.photoURL;
+      $editNotes.value = data.editing.notes;
+      $editImage.setAttribute('src', data.editing.photoURL);
+    }
+  }
+}
