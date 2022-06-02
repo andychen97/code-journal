@@ -18,9 +18,9 @@ function imageLink(event) {
   $image.setAttribute('src', event.target.value);
 }
 
-var $form = document.querySelector('form');
+var $form = document.querySelector('form[data-view="entry-form"');
 var $title = document.querySelector('input[name="user-title"]');
-var $notes = document.querySelector('textarea');
+var $notes = document.querySelector('textarea[name="notes"]');
 
 $form.addEventListener('submit', dataSet);
 
@@ -57,13 +57,27 @@ function createEntries(entry) {
   var $divColHalf2 = document.createElement('div');
   $divColHalf2.className = 'column-half';
   $divRow.appendChild($divColHalf2);
+  var $divRowBetween = document.createElement('div');
+  $divRowBetween.className = 'row space-between';
+  $divColHalf2.appendChild($divRowBetween);
   var $h2 = document.createElement('h2');
   $h2.textContent = entry.title;
-  $divColHalf2.appendChild($h2);
+  $divRowBetween.appendChild($h2);
+
+  var $editPic = document.createElement('img');
+  $editPic.setAttribute('src', 'images/edit-icon.png');
+  $editPic.setAttribute('data-entry-id', entry.entryId);
+  $editPic.className = 'edit-icon';
+
+  $divRowBetween.appendChild($editPic);
+  var $divRow2 = document.createElement('div');
+  $divRow2.className = 'row';
+  $divColHalf2.appendChild($divRow2);
   var $p = document.createElement('p');
   $p.className = 'descriptions';
   $p.textContent = entry.notes;
-  $divColHalf2.appendChild($p);
+  $divRow2.appendChild($p);
+  $editPic.addEventListener('click', editPage);
   return $li;
 }
 
@@ -95,13 +109,28 @@ function newButton(event) {
 }
 
 function viewSwap() {
-  if (data.view === 'view-entries') {
+  if (data.view === 'entries') {
     $dataViewEntries.className = '';
     $form.className = 'hidden';
-  } else if (data.view === 'entry-form') {
     $dataViewEntries.className = 'hidden';
+  } else if (data.view === 'entry-form') {
     $form.className = '';
+    $dataViewEntries.className = 'hidden';
+    $editView.className = 'hidden';
+  } else if (data.view === 'edit-entry') {
+    $editView.className = '';
+    $dataViewEntries.className = 'hidden';
+    $form.className = 'hidden';
   }
 }
 
 viewSwap();
+
+var $editView = document.querySelector('form[data-view="edit-entry"]');
+
+function editPage(event) {
+  $editView.className = '';
+  $dataViewEntries.className = 'hidden';
+  $form.className = 'hidden';
+
+}
