@@ -45,15 +45,11 @@ function dataSet(event) {
     for (var i = 0; i < data.entries.length; i++) {
       var spot = document.querySelectorAll('li');
       if (Number(data.editing.entryId) === Number(data.entries[i].entryId)) {
-        data.editing.title = $title.value;
-        data.editing.photoURL = $imageLink.value;
-        data.editing.notes = $notes.value;
-        data.editing.entryId = data.entries[i].entryId;
-        data.entries[i].title = data.editing.title;
-        data.entries[i].photoURL = data.editing.photoURL;
-        data.entries[i].notes = data.editing.notes;
+        data.entries[i].title = $title.value;
+        data.entries[i].photoURL = $imageLink.value;
+        data.entries[i].notes = $notes.value;
         data.entries[i].entryId = data.editing.entryId;
-        spot[i].replaceWith(createEntries());
+        spot[i].replaceWith(createEntries(data.entries[i]));
       }
     }
   }
@@ -63,7 +59,7 @@ function dataSet(event) {
   viewSwap();
 }
 
-function createEntries(event) {
+function createEntries(entry) {
   var $li = document.createElement('li');
   var $divRow = document.createElement('div');
   $divRow.className = 'row margin-bottom-40';
@@ -72,11 +68,7 @@ function createEntries(event) {
   $divColHalf.className = 'column-half';
   $divRow.appendChild($divColHalf);
   var $img = document.createElement('img');
-  if (data.editing === null) {
-    $img.setAttribute('src', event.photoURL);
-  } else {
-    $img.setAttribute('src', data.editing.photoURL);
-  }
+  $img.setAttribute('src', entry.photoURL);
   $img.className = 'placeholder-img';
   $divColHalf.appendChild($img);
   var $divColHalf2 = document.createElement('div');
@@ -86,19 +78,11 @@ function createEntries(event) {
   $divRowBetween.className = 'row space-between';
   $divColHalf2.appendChild($divRowBetween);
   var $h2 = document.createElement('h2');
-  if (data.editing === null) {
-    $h2.textContent = event.title;
-  } else {
-    $h2.textContent = data.editing.title;
-  }
+  $h2.textContent = entry.title;
   $divRowBetween.appendChild($h2);
   var $editPic = document.createElement('img');
   $editPic.setAttribute('src', 'images/edit-icon.png');
-  if (data.editing === null) {
-    $editPic.setAttribute('data-entry-id', event.entryId);
-  } else {
-    $editPic.setAttribute('data-entry-id', data.editing.entryId);
-  }
+  $editPic.setAttribute('data-entry-id', entry.entryId);
   $editPic.className = 'edit-icon';
   $divRowBetween.appendChild($editPic);
   var $divRow2 = document.createElement('div');
@@ -106,11 +90,7 @@ function createEntries(event) {
   $divColHalf2.appendChild($divRow2);
   var $p = document.createElement('p');
   $p.className = 'descriptions';
-  if (data.editing === null) {
-    $p.textContent = event.notes;
-  } else {
-    $p.textContent = data.editing.notes;
-  }
+  $p.textContent = entry.notes;
   $divRow2.appendChild($p);
   $editPic.addEventListener('click', editPage);
   return $li;
