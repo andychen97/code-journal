@@ -1,6 +1,6 @@
 /* global data */
 var $cancel = document.querySelector('.cancel-button');
-// var $confirm = document.querySelector('.confirm-button');
+var $confirm = document.querySelector('.confirm-button');
 var $dataViewEntries = document.querySelector('div[data-view="entries"]');
 var $delete = document.querySelector('.delete-button');
 var $editDivButton = document.querySelector('div[id="editDivButton"]');
@@ -48,14 +48,14 @@ function dataSet(event) {
     event.target.reset();
     $ul.prepend(createEntries(data.entries[0]));
   } else {
+    var $li = document.querySelectorAll('li');
     for (var i = 0; i < data.entries.length; i++) {
-      var spot = document.querySelectorAll('li');
       if (Number(data.editing.entryId) === Number(data.entries[i].entryId)) {
         data.entries[i].title = $title.value;
         data.entries[i].photoURL = $imageLink.value;
         data.entries[i].notes = $notes.value;
         data.entries[i].entryId = data.editing.entryId;
-        spot[i].replaceWith(createEntries(data.entries[i]));
+        $li[i].replaceWith(createEntries(data.entries[i]));
       }
     }
   }
@@ -170,7 +170,17 @@ function cancelModalDisplay(event) {
   $modal.className = 'modal hidden';
 }
 
-// $confirm.addEventListener('click', deleteEntry);
-// function deleteEntry(event) {
-//   console.log('hellooo');
-// }
+$confirm.addEventListener('click', deleteEntry);
+function deleteEntry(event) {
+  $modal.className = 'modal hidden';
+  var $li = document.querySelectorAll('li');
+  for (var i = 0; i < data.entries.length; i++) {
+    if (Number(data.editing.entryId) === Number(data.entries[i].entryId)) {
+      data.entries.splice(i, 1);
+      $ul.removeChild($li[i]);
+    }
+  }
+  data.view = 'entries';
+  viewSwap();
+  entryText();
+}
