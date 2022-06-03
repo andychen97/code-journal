@@ -161,10 +161,9 @@ function editPage(event) {
   }
 }
 
-// $delete.addEventListener('click', modalDisplay);
-// function modalDisplay(event) {
-//   $modal.className = 'modal display-block';
-// }
+$delete.addEventListener('click', function modalDisplay(event) {
+  $modal.className = 'modal display-block';
+});
 
 $cancel.addEventListener('click', cancelModalDisplay);
 function cancelModalDisplay(event) {
