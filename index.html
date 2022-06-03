@@ -35,8 +35,15 @@
     </div>
   </header>
   <main class="container">
-
-
+    <div class="modal hidden">
+      <div class="modal-content align-center">
+        <h3>Are you sure you want to delete this entry?</h3>
+        <div class="row space-between">
+          <button class="cancel-button">CANCEL</button>
+          <button class="confirm-button">CONFIRM</button>
+        </div>
+      </div>
+    </div>
     <form data-view="entry-form" class="hidden">
       <div class="row">
         <div class="column-full">
@@ -73,7 +80,8 @@
           <div>
             <textarea id="notes" name="notes" class="input" required></textarea>
           </div>
-          <div class="align-right">
+          <div id="editDivButton" class="align-right">
+            <button class="delete-button hidden">DELETE</button>
             <input type="submit" value="SAVE" class="purple-button">
           </div>
         </div>
@@ -81,12 +89,12 @@
     </form>
 
 
-    <div data-view="entries" class="">
+    <div data-view="entries" class="display-block">
       <div class="row">
         <div class="column-full">
           <div class="row space-between">
             <h1 class="font28px">Entries</h1>
-            <a href="#ViewEntries" class="purple-button">New</a>
+            <a href="#NewEntries" id="newButton" class="purple-button">New</a>
           </div>
         </div>
       </div>
@@ -97,12 +105,31 @@
       </ul>
     </div>
 
-
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!--<li>
       <div class="row">
