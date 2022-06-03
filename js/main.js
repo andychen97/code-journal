@@ -180,6 +180,7 @@ function deleteEntry(event) {
       $ul.removeChild($li[i]);
     }
   }
+  data.editing = null;
   data.view = 'entries';
   viewSwap();
   entryText();
