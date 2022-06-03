@@ -1,5 +1,9 @@
 .hidden {
-  display: none !important;
+  display: none;
+}
+
+.display-block {
+  display: block;
 }
 
 .container {

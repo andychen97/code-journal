@@ -1,26 +1,36 @@
 /* global data */
+var $cancel = document.querySelector('.cancel-button');
+var $confirm = document.querySelector('.confirm-button');
+var $dataViewEntries = document.querySelector('div[data-view="entries"]');
+var $delete = document.querySelector('.delete-button');
+var $editDivButton = document.querySelector('div[id="editDivButton"]');
+var $editEntryTitle = document.querySelector('h1[id="edit-entry"]');
+var $entriesTab = document.querySelector('.entries');
+var $form = document.querySelector('form[data-view="entry-form"');
+var $imageLink = document.querySelector('input[name="user-URL"]');
+var $image = document.querySelector('.placeholder-img');
+var $newButton = document.querySelector('a[id="newButton"]');
+var $modal = document.querySelector('.modal');
+var $newEntryTitle = document.querySelector('h1[id="new-entry"]');
 var $noEntriesText = document.querySelector('p');
+var $notes = document.querySelector('textarea[name="notes"]');
+var $title = document.querySelector('input[name="user-title"]');
+var $ul = document.querySelector('ul');
+
 function entryText() {
   if (data.entries.length < 1) {
-    $noEntriesText.className = '';
+    $noEntriesText.className = 'display-block';
   } else {
     $noEntriesText.className = 'hidden';
   }
 }
 entryText();
 
-var $imageLink = document.querySelector('input[name="user-URL"]');
-var $image = document.querySelector('.placeholder-img');
-
 $imageLink.addEventListener('input', imageLink);
 
 function imageLink(event) {
   $image.setAttribute('src', event.target.value);
 }
-
-var $form = document.querySelector('form[data-view="entry-form"');
-var $title = document.querySelector('input[name="user-title"]');
-var $notes = document.querySelector('textarea[name="notes"]');
 
 $form.addEventListener('submit', dataSet);
 
@@ -36,20 +46,16 @@ function dataSet(event) {
     data.entries.unshift(singleData);
     $image.setAttribute('src', 'images/placeholder-image-square.jpg');
     event.target.reset();
-    $dataViewEntries.className = '';
-    $form.className = 'hidden';
-    $newEntryTitle.className = 'font28px';
-    $editEntryTitle.className = 'font28px hidden';
     $ul.prepend(createEntries(data.entries[0]));
   } else {
+    var $li = document.querySelectorAll('li');
     for (var i = 0; i < data.entries.length; i++) {
-      var spot = document.querySelectorAll('li');
       if (Number(data.editing.entryId) === Number(data.entries[i].entryId)) {
         data.entries[i].title = $title.value;
         data.entries[i].photoURL = $imageLink.value;
         data.entries[i].notes = $notes.value;
         data.entries[i].entryId = data.editing.entryId;
-        spot[i].replaceWith(createEntries(data.entries[i]));
+        $li[i].replaceWith(createEntries(data.entries[i]));
       }
     }
   }
@@ -96,7 +102,6 @@ function createEntries(entry) {
   return $li;
 }
 
-var $ul = document.querySelector('ul');
 window.addEventListener('DOMContentLoaded', loaded);
 function loaded(event) {
   for (var i = 0; i < data.entries.length; i++) {
@@ -104,50 +109,46 @@ function loaded(event) {
   }
 }
 
-var $entriesPage = document.querySelector('.entries');
-$entriesPage.addEventListener('click', viewEntries);
+$entriesTab.addEventListener('click', viewEntries);
 
 function viewEntries(event) {
-  $dataViewEntries.className = '';
-  $form.className = 'hidden';
   data.view = 'entries';
+  viewSwap();
 }
 
-var $newButton = document.querySelector('div .row .space-between > a');
-var $dataViewEntries = document.querySelector('div[data-view="entries"]');
 $newButton.addEventListener('click', newButton);
 
 function newButton(event) {
-  $form.className = '';
-  $dataViewEntries.className = 'hidden';
-  $newEntryTitle.className = 'font28px';
-  $editEntryTitle.className = 'font28px hidden';
   data.view = 'entry-form';
   $image.setAttribute('src', 'images/placeholder-image-square.jpg');
   $form.reset();
+  viewSwap();
 }
-
-var $newEntryTitle = document.querySelector('h1[id="new-entry"]');
-var $editEntryTitle = document.querySelector('h1[id="edit-entry"]');
 
 function viewSwap() {
   if (data.view === 'entry-form') {
-    $form.className = '';
+    $form.className = 'display-block';
     $dataViewEntries.className = 'hidden';
     $newEntryTitle.className = 'font28px';
+    $editEntryTitle.className = 'font28px hidden';
+    $editDivButton.className = 'align-right';
+    $delete.className = 'delete-button hidden';
   } else if (data.view === 'entries') {
-    $dataViewEntries.className = '';
+    $dataViewEntries.className = 'display-block';
     $form.className = 'hidden';
+  } else if (data.view === 'edit-form') {
+    $form.className = 'display-block';
+    $dataViewEntries.className = 'hidden';
+    $editEntryTitle.className = 'font28px';
+    $newEntryTitle.className = 'font28px hidden';
+    $editDivButton.className = 'row space-between';
+    $delete.className = 'delete-button';
   }
 }
 
 function editPage(event) {
-  $dataViewEntries.className = 'hidden';
-  $form.className = '';
-  $editEntryTitle.className = 'font28px';
-  $newEntryTitle.className = 'font28px hidden';
-
-  data.view = 'entries';
+  data.view = 'edit-form';
+  viewSwap();
   for (var i = 0; i < data.entries.length; i++) {
     if (Number(event.target.dataset.entryId) === data.entries[i].entryId) {
       data.editing = { ...data.entries[i] };
@@ -160,4 +161,27 @@ function editPage(event) {
   }
 }
 
-viewSwap();
+$delete.addEventListener('click', function modalDisplay(event) {
+  $modal.className = 'modal display-block';
+});
+
+$cancel.addEventListener('click', cancelModalDisplay);
+function cancelModalDisplay(event) {
+  $modal.className = 'modal hidden';
+}
+
+$confirm.addEventListener('click', deleteEntry);
+function deleteEntry(event) {
+  $modal.className = 'modal hidden';
+  var $li = document.querySelectorAll('li');
+  for (var i = 0; i < data.entries.length; i++) {
+    if (Number(data.editing.entryId) === Number(data.entries[i].entryId)) {
+      data.entries.splice(i, 1);
+      $ul.removeChild($li[i]);
+    }
+  }
+  data.editing = null;
+  data.view = 'entries';
+  viewSwap();
+  entryText();
+}
